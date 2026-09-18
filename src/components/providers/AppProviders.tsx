@@ -22,6 +22,33 @@ export const AppProviders = ({ children }: { children: React.ReactNode }) => {
     init();
   }, [init]);
 
+  // Sinkronisasi otomatis class 'dark' ke tag <html> berdasarkan state tema / sistem OS
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const applyDark = (shouldBeDark: boolean) => {
+      if (shouldBeDark) {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+    };
+
+    if (themeMode === 'dark') {
+      applyDark(true);
+    } else if (themeMode === 'light') {
+      applyDark(false);
+    } else {
+      // Jika mode 'system' atau bawaan
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      applyDark(mediaQuery.matches);
+
+      const listener = (e: MediaQueryListEvent) => applyDark(e.matches);
+      mediaQuery.addEventListener('change', listener);
+      return () => mediaQuery.removeEventListener('change', listener);
+    }
+  }, [themeMode]);
+
   // Halaman publik yang tidak memerlukan proteksi PIN maupun modal onboarding
   const isPublicPath = pathname === '/' || pathname.startsWith('/auth');
 

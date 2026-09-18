@@ -10,7 +10,6 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://monflow.vercel.app';
 
-// Mengatur warna status bar browser ponsel agar menyatu dengan tema
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
@@ -42,9 +41,23 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Schema JSON-LD agar Google mengenali nama situs sebagai "MonFlow", bukan "Vercel"
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'MonFlow',
+    alternateName: ['MonFlow App', 'MonFlow Financial Hub'],
+    url: siteUrl,
+  };
+
   return (
-    // 'className="dark"' dihapus agar AppProviders bebas mengontrol tema terang/gelap
     <html lang="id" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className={`${plusJakartaSans.variable} font-sans antialiased min-h-screen selection:bg-[#00838F]/30`}>
         <AppProviders>{children}</AppProviders>
       </body>
