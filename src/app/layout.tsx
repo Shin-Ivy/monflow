@@ -1,3 +1,4 @@
+// src/app/layout.tsx
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
@@ -21,13 +22,15 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'MonFlow - Smart Financial Hub',
+  applicationName: 'MonFlow',
+  title: {
+    default: 'MonFlow - Smart Financial Hub',
+    template: '%s | MonFlow',
+  },
   description: 'Smart Personal Ledger & Wealth Management',
   icons: {
-    icon: [
-      { url: '/icon.png', type: 'image/png' },
-      { url: '/favicon.ico', sizes: 'any' },
-    ],
+    icon: '/icon.png',
+    shortcut: '/icon.png',
     apple: '/icon.png',
   },
   openGraph: {
@@ -37,16 +40,23 @@ export const metadata: Metadata = {
     siteName: 'MonFlow',
     locale: 'id_ID',
     type: 'website',
+    images: [
+      {
+        url: '/icon.png',
+        width: 512,
+        height: 512,
+        alt: 'MonFlow Logo',
+      },
+    ],
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Schema JSON-LD agar Google mengenali nama situs sebagai "MonFlow", bukan "Vercel"
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'MonFlow',
-    alternateName: ['MonFlow App', 'MonFlow Financial Hub'],
+    alternateName: ['MonFlow App', 'MonFlow Hub'],
     url: siteUrl,
   };
 

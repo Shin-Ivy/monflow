@@ -88,11 +88,14 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.12]">
-            Kelola Finansial Mandiri <br className="hidden sm:inline" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00838F] via-teal-400 to-[#EB7500]">
-              Tanpa Batas Jaringan.
-            </span>
-          </h1>
+  <span className="block text-2xl sm:text-3xl lg:text-4xl font-bold text-[#00838F] mb-2 tracking-normal">
+    MonFlow
+  </span>
+  Kelola Finansial Mandiri <br className="hidden sm:inline" />
+  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00838F] via-teal-400 to-[#EB7500]">
+    Tanpa Batas Jaringan.
+  </span>
+</h1>
 
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
             Workspace pembukuan finansial pribadi yang menggabungkan fleksibilitas offline instan, kecerdasan AI pemindai struk belanja, dan privasi penuh atas data kekayaan Anda.
